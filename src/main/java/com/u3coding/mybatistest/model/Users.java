@@ -2,14 +2,10 @@ package com.u3coding.mybatistest.model;
 
 public class Users {
     private String userid;
+    private String psw;
+    private String email;
+    private String name;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     private int id;
     public Users(int id,String userid, String name, String psw, String email) {
@@ -19,8 +15,14 @@ public class Users {
         this.psw = psw;
         this.email = email;
     }
+    public int getId() {
+        return id;
+    }
 
-    private String name;
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public String getUserid() {
         return userid;
@@ -54,6 +56,5 @@ public class Users {
         this.email = email;
     }
 
-    private String psw;
-    private String email;
+
 }

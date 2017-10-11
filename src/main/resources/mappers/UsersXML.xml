@@ -3,10 +3,35 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.u3coding.mybatistest.mapper.UsersMapper">
+    <sql id="cols">
+        userid,name
+    </sql>
     <select id="findAll" resultType="com.u3coding.mybatistest.model.Users">
         select * from users
     </select>
     <select id="findOne" resultType="com.u3coding.mybatistest.model.Users">
-        select * from users where id = 1
+        select <include refid="cols"/> from users where id = 1
     </select>
+    <insert id="insertOne" parameterType="com.u3coding.mybatistest.model.Users">
+        insert into users(userid,name,email,psw) values(#}{userid},#{name},#{email},#{psw})
+    </insert>
+    <update id="update" parameterType="com.u3coding.mybatistest.model.Users">
+        UPDATE users
+        <set>
+            <if test="name =! null">
+                name = #{name}
+            </if>
+        </set>
+        <where>
+            <if test="userid =! null">
+                userid = #{userid}
+            </if>
+        </where>
+    </update>
+    <delete id="deleteById" parameterType="integer">
+        DELETE FROM users when userid IN
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
